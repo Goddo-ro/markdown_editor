@@ -13,8 +13,14 @@ import {
 const AuthForm = (props) => {
   const [show, setShow] = useState(false);
 
+  const handleKeyPress = (event) => {
+    if(event.key === 'Enter') {
+      props.submit();
+    }
+  }
+
   return (
-    <FormControl>
+    <FormControl onKeyDown={handleKeyPress}>
       <FormLabel>Email:</FormLabel>
       <Input
         value={props.email}

@@ -3,6 +3,8 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {AbsoluteCenter, Box, Center, Link, Text} from "@chakra-ui/react";
 import AuthForm from "../components/AuthForm";
 import {Link as RouterLink} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {setUser} from "../store/slices/userSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,12 +12,19 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const dispatch = useDispatch();
+
   const login = () => {
     setIsLoading(true);
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        dispatch(setUser({
+          email: user.email,
+          id: user.uid,
+          token: user.accessToken,
+        }))
         setIsLoading(false);
         setErrorMessage("");
       })

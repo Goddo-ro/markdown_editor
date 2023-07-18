@@ -3,12 +3,16 @@ import {AbsoluteCenter, Box, Center, Link, Text} from "@chakra-ui/react";
 import AuthForm from "../components/AuthForm";
 import {Link as RouterLink} from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {setUser} from "../store/slices/userSlice";
+import {useDispatch} from "react-redux";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const dispatch = useDispatch();
 
   const register = () => {
     setIsLoading(true);
@@ -17,7 +21,11 @@ const SignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
+        dispatch(setUser({
+          email: user.email,
+          id: user.uid,
+          token: user.accessToken,
+        }))
         setIsLoading(false);
         setErrorMessage("");
       })
