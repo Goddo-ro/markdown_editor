@@ -67,7 +67,7 @@ const SignUpForm = () => {
       </InputGroup>
 
       <Button onClick={signup} isLoading={isLoading} colorScheme='teal' mt={4} w="100%">
-        Login
+        Sign Up
       </Button>
 
       <Center mt={2}>
