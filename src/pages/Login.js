@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {AbsoluteCenter, Box, Center, Container, Link, Text} from "@chakra-ui/react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {AbsoluteCenter, Box, Center, Link, Text} from "@chakra-ui/react";
 import AuthForm from "../components/AuthForm";
 import {Link as RouterLink} from "react-router-dom";
 
@@ -10,6 +11,18 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const login = () => {
+    setIsLoading(true);
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setIsLoading(false);
+        setErrorMessage("");
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+        setIsLoading(false);
+      });
   }
 
   return (

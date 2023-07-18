@@ -7,10 +7,8 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Link,
   Text
 } from "@chakra-ui/react";
-import {Link as RouterLink} from "react-router-dom";
 
 const AuthForm = (props) => {
   const [show, setShow] = useState(false);
