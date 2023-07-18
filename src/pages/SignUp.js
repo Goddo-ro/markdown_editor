@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {AbsoluteCenter, Box, Center, Link, Text} from "@chakra-ui/react";
 import AuthForm from "../components/AuthForm";
 import {Link as RouterLink} from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +11,20 @@ const SignUp = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const register = () => {
-    console.log(email, password);
+    setIsLoading(true);
+
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        setIsLoading(false);
+        setErrorMessage("");
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+        setIsLoading(false);
+      });
   }
 
   return (
