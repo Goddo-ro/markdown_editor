@@ -6,3 +6,14 @@ export const store = configureStore({
     user: userReducer,
   }
 });
+
+const handleUserChange = () => {
+  const user = store.getState().user;
+  if (user.email) {
+    localStorage.setItem("user", JSON.stringify(user));
+  } else {
+    localStorage.removeItem("user");
+  }
+}
+
+store.subscribe(handleUserChange)

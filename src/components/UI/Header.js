@@ -1,9 +1,9 @@
 import React from 'react';
 import {Flex, Heading, Spacer} from "@chakra-ui/react";
 import {useDispatch} from "react-redux";
-import {removeUser} from "../store/slices/userSlice";
+import {removeUser} from "../../store/slices/userSlice";
 import {ImExit} from "react-icons/im";
-import {useAuth} from "../hooks/useAuth";
+import {useAuth} from "../../hooks/useAuth";
 
 const Header = () => {
   const {isAuth} = useAuth();
