@@ -1,11 +1,15 @@
 import AppRouter from "./components/AppRouter";
-import {Container} from "@chakra-ui/react";
+import {Box, Container} from "@chakra-ui/react";
+import Header from "./components/Header";
 
 function App() {
   return (
-    <div className="App">
-      <AppRouter/>
-    </div>
+    <Container maxW="1920px" minH="100vh" p={0} className="App">
+      <Box>
+        <Header/>
+        <AppRouter/>
+      </Box>
+    </Container>
   );
 }
 

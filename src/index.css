@@ -23,3 +23,27 @@ code {
   border: 1px solid #c7c7c7;
   border-radius: 8px;
 }
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#exit-btn-container {
+  cursor: pointer;
+  color: #f95f5f;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  overflow: hidden;
+}
+
+#exit-btn-container > * {
+  transform: translateX(200%);
+  transition: 1s;
+}
+
+#exit-btn-container:hover > * {
+  transform: translateX(0);
+}
