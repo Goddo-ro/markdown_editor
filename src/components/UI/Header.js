@@ -2,14 +2,9 @@ import React from 'react';
 import { Flex, Heading, IconButton, Spacer } from "@chakra-ui/react";
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import { useDispatch } from "react-redux";
-import { removeUser } from "../store/slices/userSlice";
+import { removeUser } from "../../store/slices/userSlice";
 import { ImExit } from "react-icons/im";
-import { useAuth } from "../hooks/useAuth";
-import {Flex, Heading, Spacer} from "@chakra-ui/react";
-import {useDispatch} from "react-redux";
-import {removeUser} from "../../store/slices/userSlice";
-import {ImExit} from "react-icons/im";
-import {useAuth} from "../../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 
 const Header = ({ onShowSidebar }) => {
   const { isAuth } = useAuth();

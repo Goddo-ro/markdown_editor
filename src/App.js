@@ -1,11 +1,9 @@
 import AppRouter from "./components/AppRouter";
 import { Box, Container } from "@chakra-ui/react";
-import Header from "./components/Header";
+import Header from "./components/UI/Header";
 import Sidebar from "./components/Sidebar";
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
-import {Box, Container} from "@chakra-ui/react";
-import Header from "./components/UI/Header";
 
 function App() {
   const [isSidebarOpen, setSidebarOpen] = useState(false)
