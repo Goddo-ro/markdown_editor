@@ -8,24 +8,25 @@ import {
 } from '@chakra-ui/react'
 import { useAuth } from "../hooks/useAuth";
 import { AiOutlineFileAdd } from "react-icons/ai";
-import { getDocs, collection} from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
+import MarkdownList from "./MarkdownList";
+import MarkdownService from "../services/MarkdownService";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const [markdowns, setMarkdowns] = useState([]);
 
-  const { email } = useAuth();
-
-  const markdownsCollectionRef = collection(db, "docs");
+  const { email, id } = useAuth();
 
   const fetchMarkdowns = async () => {
     try {
-      const data = await getDocs(markdownsCollectionRef);
-      const filteredData = data.docs.map((doc) => ({...doc.data()}));
+      const data = await MarkdownService.getAll();
+      const filteredData = data.docs.map((doc) =>
+        ({ ...doc.data(), id: doc.id })).filter(doc => doc.userId === id);
       setMarkdowns(filteredData);
-    } catch (err) {
-      console.log(err);
+    } catch (e) {
+      console.log(e);
     }
   }
 
@@ -47,6 +48,7 @@ const Sidebar = ({ isOpen, onClose }) => {
               <Spacer/>
               <AiOutlineFileAdd cursor="pointer"/>
             </Flex>
+            <MarkdownList markdowns={markdowns} fetchMarkdowns={fetchMarkdowns}/>
           </DrawerBody>
         </DrawerContent>
       </DrawerOverlay>

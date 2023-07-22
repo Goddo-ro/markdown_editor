@@ -1,0 +1,19 @@
+.markdownListItem:hover,
+.markdownListItem:focus {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.markdownListItem .delete-btn {
+    display: none;
+    cursor: pointer;
+}
+
+.markdownListItem:hover .delete-btn,
+.markdownListItem:focus .delete-btn {
+    display: block;
+}
+
+.markdownListItem .delete-btn:hover,
+.markdownListItem .delete-btn:focus {
+    color: #f95f5f;
+}
