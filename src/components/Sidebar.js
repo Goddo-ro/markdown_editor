@@ -8,9 +8,7 @@ import {
 } from '@chakra-ui/react'
 import { useAuth } from "../hooks/useAuth";
 import { AiOutlineFileAdd } from "react-icons/ai";
-import { getDocs, collection } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { db } from "../firebase";
 import MarkdownList from "./MarkdownList";
 import MarkdownService from "../services/MarkdownService";
 

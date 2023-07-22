@@ -1,5 +1,9 @@
-.markdownListItem:hover,
-.markdownListItem:focus {
+.markdownListItem.current {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.markdownListItem:hover:not(.current),
+.markdownListItem:focus:not(.current) {
     background: rgba(0, 0, 0, 0.1);
 }
 

@@ -14,10 +14,10 @@ const markdownSlice = createSlice({
   initialState,
   reducers: {
     setMarkdown(state, action) {
-      state.title = action.title;
-      state.body = action.body;
-      state.id = action.id;
-      state.userId = action.userId;
+      state.title = action.payload.title;
+      state.body = action.payload.body;
+      state.id = action.payload.id;
+      state.userId = action.payload.userId;
     },
     removeMarkdown(state) {
       state.title = state.body = state.id = state.userId = null;
