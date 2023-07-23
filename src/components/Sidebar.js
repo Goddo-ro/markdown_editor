@@ -10,27 +10,19 @@ import { useAuth } from "../hooks/useAuth";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import React, { useEffect, useState } from "react";
 import MarkdownList from "./MarkdownList";
-import MarkdownService from "../services/MarkdownService";
+import { fetchMarkdowns } from "../store/slices/markdownsSlice";
+import { useDispatch } from "react-redux";
+import { useMarkdowns } from "../hooks/useMarkdowns";
 
 const Sidebar = ({ isOpen, onClose }) => {
-  const [markdowns, setMarkdowns] = useState([]);
+  const dispatch = useDispatch();
 
   const { email, id } = useAuth();
-
-  const fetchMarkdowns = async () => {
-    try {
-      const data = await MarkdownService.getAll();
-      const filteredData = data.docs.map((doc) =>
-        ({ ...doc.data(), id: doc.id })).filter(doc => doc.userId === id);
-      setMarkdowns(filteredData);
-    } catch (e) {
-      console.log(e);
-    }
-  }
+  const markdowns = useMarkdowns();
 
   useEffect(() => {
-    fetchMarkdowns();
-  }, []);
+    fetchMarkdowns(id, dispatch);
+  }, [email]);
 
   return (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
@@ -46,7 +38,7 @@ const Sidebar = ({ isOpen, onClose }) => {
               <Spacer/>
               <AiOutlineFileAdd cursor="pointer"/>
             </Flex>
-            <MarkdownList markdowns={markdowns} fetchMarkdowns={fetchMarkdowns}/>
+            <MarkdownList/>
           </DrawerBody>
         </DrawerContent>
       </DrawerOverlay>

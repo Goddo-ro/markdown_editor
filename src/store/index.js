@@ -1,11 +1,13 @@
 import {configureStore} from "@reduxjs/toolkit";
 import userReducer from "./slices/userSlice";
 import markdownReducer from "./slices/markdownSlice";
+import markdownsReducer from "./slices/markdownsSlice";
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     markdown: markdownReducer,
+    markdowns: markdownsReducer,
   }
 });
 

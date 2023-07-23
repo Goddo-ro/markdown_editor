@@ -6,15 +6,16 @@ import MarkdownService from "../../services/MarkdownService";
 import { useDispatch } from "react-redux";
 import { setMarkdown } from "../../store/slices/markdownSlice";
 import { useCurDoc } from "../../hooks/useCurDoc";
+import { fetchMarkdowns } from "../../store/slices/markdownsSlice";
 
-const MarkdownListItem = ({ markdown, fetchMarkdowns }) => {
+const MarkdownListItem = ({ markdown }) => {
   const {id: curDocId} = useCurDoc();
 
   const dispatch = useDispatch();
 
   const deleteMarkdown = async () => {
     await MarkdownService.delete(markdown.id);
-    fetchMarkdowns();
+    await fetchMarkdowns();
   }
 
   const handleClick = e => {
