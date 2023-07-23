@@ -1,15 +1,18 @@
 .home-container {
     height: calc(100vh - var(--header-height));
-    background: #f95f5f;
 }
 
 .home-container > * {
     height: 100%;
 }
 
-.cm-editor {
+.cm-editor, .preview {
     height: 100%;
     max-height: calc(100vh - var(--header-height));
+}
+
+.preview {
+    overflow-y: scroll;
 }
 
 .cm-scroller::-webkit-scrollbar {
