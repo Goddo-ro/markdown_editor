@@ -12,13 +12,11 @@ import React, { useEffect, useState } from "react";
 import MarkdownList from "./MarkdownList";
 import { fetchMarkdowns } from "../store/slices/markdownsSlice";
 import { useDispatch } from "react-redux";
-import { useMarkdowns } from "../hooks/useMarkdowns";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
 
   const { email, id } = useAuth();
-  const markdowns = useMarkdowns();
 
   useEffect(() => {
     fetchMarkdowns(id, dispatch);

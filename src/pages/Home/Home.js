@@ -8,8 +8,9 @@ import { BiSave } from "react-icons/bi";
 import MarkdownService from "../../services/MarkdownService";
 import { useDispatch } from "react-redux";
 import { setMarkdown } from "../../store/slices/markdownSlice";
+import { fetchMarkdowns } from "../../store/slices/markdownsSlice";
 
-const Home = ({fetchMarkdowns}) => {
+const Home = () => {
   const [isSaved, setSaved] = useState(true);
   const [curTitle, setCurTitle] = useState("");
   const [value, setValue] = useState("");
@@ -31,6 +32,10 @@ const Home = ({fetchMarkdowns}) => {
     }
   }, [curTitle, value]);
 
+  const refetchMarkdowns = async () => {
+    await fetchMarkdowns(userId, dispatch);
+  }
+
   const handleSave = () => {
     MarkdownService.update(id, curTitle, value)
       .then(() => {
@@ -39,8 +44,10 @@ const Home = ({fetchMarkdowns}) => {
           title: curTitle,
           body: value,
           userId: userId,
-        }))
+        }));
 
+        setSaved(true);
+        refetchMarkdowns();
       });
   }
 

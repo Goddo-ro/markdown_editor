@@ -9,13 +9,13 @@ import { useCurDoc } from "../../hooks/useCurDoc";
 import { fetchMarkdowns } from "../../store/slices/markdownsSlice";
 
 const MarkdownListItem = ({ markdown }) => {
-  const {id: curDocId} = useCurDoc();
+  const {id: curDocId, userId} = useCurDoc();
 
   const dispatch = useDispatch();
 
   const deleteMarkdown = async () => {
     await MarkdownService.delete(markdown.id);
-    await fetchMarkdowns();
+    await fetchMarkdowns(userId, dispatch);
   }
 
   const handleClick = e => {
