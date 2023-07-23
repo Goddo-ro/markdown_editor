@@ -35,7 +35,7 @@ const Login = () => {
   }
 
   return (
-    <Box h="100vh">
+    <Box>
       <AbsoluteCenter className="form-container">
         <Center mb={5}>
           <Text fontSize="2xl">Login</Text>
