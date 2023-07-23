@@ -5,8 +5,8 @@ import './assets/styles/edge-dark.min.css';
 import App from './App';
 import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from '@chakra-ui/react'
-import {Provider} from "react-redux";
-import {store} from "./store";
+import { Provider } from "react-redux";
+import { store } from "./store";
 import "./firebase";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -14,7 +14,7 @@ root.render(
   <ChakraProvider>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <App/>
       </Provider>
     </BrowserRouter>
   </ChakraProvider>

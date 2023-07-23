@@ -10,7 +10,7 @@ import "github-markdown-css/github-markdown.css"
 import "github-markdown-css/github-markdown-dark.css"
 import { Box } from "@chakra-ui/react";
 
-const Preview = ({value}) => {
+const Preview = ({ value }) => {
   const md = unified()
     .use(remarkParse)
     .use(remarkGfm)

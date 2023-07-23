@@ -1,9 +1,13 @@
 .home-container {
     height: calc(100vh - var(--header-height));
+    display: flex;
+    flex-direction: column;
+    background: #262729;
+    color: #c7c7c7;
 }
 
-.home-container > * {
-    height: 100%;
+.home-container--grid {
+    flex: 1;
 }
 
 .cm-editor, .preview {
@@ -25,4 +29,16 @@
 
 .cm-scroller::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+#markdown-title {
+    background: transparent;
+    outline: none;
+    border: 1px solid #c7c7c7;
+    padding-inline: 4px;
+}
+
+#save-btn {
+    cursor: pointer;
+    font-size: 1.5rem;
 }
