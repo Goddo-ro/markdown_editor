@@ -32,10 +32,6 @@ const Home = () => {
     }
   }, [curTitle, value]);
 
-  const refetchMarkdowns = async () => {
-    await fetchMarkdowns(userId, dispatch);
-  }
-
   const handleSave = () => {
     MarkdownService.update(id, curTitle, value)
       .then(() => {
@@ -47,12 +43,18 @@ const Home = () => {
         }));
 
         setSaved(true);
-        refetchMarkdowns();
+        fetchMarkdowns(userId, dispatch);
       });
   }
 
+  const handleKey = (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.altKey && e.code === 'KeyS' && !isSaved) {
+      handleSave();
+    }
+  }
+
   return (
-    <Box className="home-container">
+    <Box className="home-container" onKeyDown={handleKey}>
       <Flex p={2} alignItems="center">
         <input id="markdown-title" value={curTitle}
                onChange={(e) => setCurTitle(e.target.value)}
