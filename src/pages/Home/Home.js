@@ -9,6 +9,7 @@ import MarkdownService from "../../services/MarkdownService";
 import { useDispatch } from "react-redux";
 import { setMarkdown } from "../../store/slices/markdownSlice";
 import { fetchMarkdowns } from "../../store/slices/markdownsSlice";
+import { useAuth } from "../../hooks/useAuth";
 
 const Home = () => {
   const [isSaved, setSaved] = useState(true);
@@ -17,7 +18,9 @@ const Home = () => {
 
   const dispatch = useDispatch();
 
-  const {id, title, body, userId} = useCurDoc();
+  const { id: userId } = useAuth();
+
+  const { isNew, id, title, body } = useCurDoc();
 
   useEffect(() => {
     setCurTitle(title);
@@ -33,18 +36,30 @@ const Home = () => {
   }, [curTitle, value]);
 
   const handleSave = () => {
-    MarkdownService.update(id, curTitle, value)
-      .then(() => {
-        dispatch(setMarkdown({
-          id: id,
-          title: curTitle,
-          body: value,
-          userId: userId,
-        }));
+    if (isNew) {
+      MarkdownService.add(curTitle, value, userId)
+        .then(res => {
+          dispatch(setMarkdown({
+            id: res.id,
+            title: curTitle,
+            body: value,
+            userId: userId,
+          }));
+        })
+    } else {
+      MarkdownService.update(id, curTitle, value)
+        .then(() => {
+          dispatch(setMarkdown({
+            id: id,
+            title: curTitle,
+            body: value,
+            userId: userId,
+          }));
+        });
+    }
 
-        setSaved(true);
-        fetchMarkdowns(userId, dispatch);
-      });
+    setSaved(true);
+    fetchMarkdowns(userId, dispatch);
   }
 
   const handleKey = (e) => {

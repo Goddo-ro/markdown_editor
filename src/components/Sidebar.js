@@ -12,6 +12,7 @@ import React, { useEffect, useState } from "react";
 import MarkdownList from "./MarkdownList";
 import { fetchMarkdowns } from "../store/slices/markdownsSlice";
 import { useDispatch } from "react-redux";
+import { removeMarkdown } from "../store/slices/markdownSlice";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
@@ -21,6 +22,11 @@ const Sidebar = ({ isOpen, onClose }) => {
   useEffect(() => {
     fetchMarkdowns(id, dispatch);
   }, [email]);
+
+  const handleNew = () => {
+    dispatch(removeMarkdown());
+    onClose();
+  }
 
   return (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
@@ -34,7 +40,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 Markdowns:
               </Text>
               <Spacer/>
-              <AiOutlineFileAdd cursor="pointer"/>
+              <AiOutlineFileAdd onClick={handleNew} cursor="pointer"/>
             </Flex>
             <MarkdownList/>
           </DrawerBody>

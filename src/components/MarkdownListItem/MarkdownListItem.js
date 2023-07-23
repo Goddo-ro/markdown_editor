@@ -4,7 +4,7 @@ import { BiTrashAlt } from "react-icons/bi";
 import "./MarkdownListItem.css";
 import MarkdownService from "../../services/MarkdownService";
 import { useDispatch } from "react-redux";
-import { setMarkdown } from "../../store/slices/markdownSlice";
+import { removeMarkdown, setMarkdown } from "../../store/slices/markdownSlice";
 import { useCurDoc } from "../../hooks/useCurDoc";
 import { fetchMarkdowns } from "../../store/slices/markdownsSlice";
 
@@ -16,6 +16,7 @@ const MarkdownListItem = ({ markdown }) => {
   const deleteMarkdown = async () => {
     await MarkdownService.delete(markdown.id);
     await fetchMarkdowns(userId, dispatch);
+    dispatch(removeMarkdown());
   }
 
   const handleClick = e => {

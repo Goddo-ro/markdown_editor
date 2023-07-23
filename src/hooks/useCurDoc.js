@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 
 export function useCurDoc() {
-  const { title, body, id, userId } = useSelector(state => state.markdown);
+  const { isNew, title, body, id, userId } = useSelector(state => state.markdown);
 
   return {
+    isNew,
     title,
     body,
     id,
